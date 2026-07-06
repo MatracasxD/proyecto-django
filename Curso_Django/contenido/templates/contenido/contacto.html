@@ -1,0 +1,41 @@
+{% extends 'contenido/encabezado.html' %}
+{% load static %}
+
+{% block titulo %}Contacto - Curso Django{% endblock %}
+
+{% block page_header_title %}Formulario de Contacto{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <p class="text-center text-muted mb-4">¿Tienes alguna pregunta o sugerencia? No dudes en escribirnos.</p>
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="tu@email.com" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="asunto" class="form-label">Asunto</label>
+                    <input type="text" class="form-control" id="asunto" name="asunto" placeholder="Asunto del mensaje" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensaje" name="mensaje" rows="6" placeholder="Tu mensaje aquí..." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg w-100">Enviar Mensaje</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

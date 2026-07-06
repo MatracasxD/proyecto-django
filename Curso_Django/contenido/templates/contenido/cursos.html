@@ -1,0 +1,40 @@
+{% extends 'contenido/encabezado.html' %}
+{% load static %}
+
+{% block titulo %}Cursos - Curso Django{% endblock %}
+
+{% block page_header_title %}Nuestros Cursos{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <div class="row">
+        {% for curso in cursos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if curso.imagen %}
+                <img src="{{ curso.imagen.url }}" class="card-img-top" alt="{{ curso.nombre }}">
+                {% else %}
+                <div class="card-img-top bg-light d-flex align-items-center justify-content-center">
+                    <span class="text-muted">Sin imagen</span>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ curso.nombre }}</h5>
+                    <p class="card-text small">{{ curso.descripcion|truncatewords:15 }}</p>
+                    <p class="text-muted small mb-1"><strong>Nivel:</strong> {{ curso.get_nivel_display }}</p>
+                    <p class="text-muted small"><strong>Estudiantes:</strong> {{ curso.estudiantes }}</p>
+                </div>
+                <div class="card-footer bg-white">
+                    <small class="text-muted">{{ curso.fecha_creacion|date:"d/m/Y" }}</small>
+                    <a href="#" class="btn btn-primary btn-sm float-end">Ver</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">No hay cursos disponibles por el momento.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
